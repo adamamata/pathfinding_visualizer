@@ -1,8 +1,8 @@
 //GLOBAL VARIABLES 
 const wh = 600;
-const cellSize = 60; 
-const rows = 10;
-const cols = 10;
+const cellSize = 30; 
+const rows = 20;
+const cols = 20;
 const canvas = document.createElement('canvas'); 
 const ctx = canvas.getContext('2d');
 
@@ -24,12 +24,12 @@ function setup(){
 function drawGrid(){
     let x = 0; 
     let y = 0;
-    for (let j = 0; j < 10; j++){
-        for (let i = 0; i < 10; i++){
+    for (let j = 0; j < rows; j++){
+        for (let i = 0; i < cols; i++){
             ctx.strokeRect(x, y, cellSize, cellSize);
-            x = x + 1 * 60;
+            x = x + 1 * 30;
         }
         x = 0;   
-        y = y + 1 * 60;  
+        y = y + 1 * 30;  
     }
 }
