@@ -21,12 +21,16 @@ function setup(){
     document.body.insertBefore(canvas, document.body.childNodes[0]); //Inserts canvas before the first element in body 
 }
 
+function draw(x, y){
+    ctx.strokeRect(x, y, cellSize, cellSize);
+}
+
 function drawGrid(){
     let x = 0; 
     let y = 0;
     for (let j = 0; j < rows; j++){
         for (let i = 0; i < cols; i++){
-            ctx.strokeRect(x, y, cellSize, cellSize);
+            draw(x, y, cellSize, cellSize);
             x = x + 1 * 30;
         }
         x = 0;   
