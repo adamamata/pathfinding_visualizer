@@ -3,6 +3,7 @@ const wh = 600;
 const cellSize = 30; 
 const rows = 20;
 const cols = 20;
+const grid = [];
 const canvas = document.createElement('canvas'); 
 const ctx = canvas.getContext('2d');
 
@@ -30,7 +31,7 @@ function drawGrid(){
     let y = 0;
     for (let j = 0; j < rows; j++){
         for (let i = 0; i < cols; i++){
-            draw(x, y, cellSize, cellSize);
+            grid.push(draw(x, y, cellSize, cellSize));
             x = x + 1 * 30;
         }
         x = 0;   
