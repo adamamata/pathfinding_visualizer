@@ -31,7 +31,7 @@ function drawGrid(){
     let y = 0;
     for (let j = 0; j < rows; j++){
         for (let i = 0; i < cols; i++){
-            grid.push(draw(x, y, cellSize, cellSize));
+            draw(x, y, cellSize, cellSize);
             x = x + 1 * 30;
         }
         x = 0;   
