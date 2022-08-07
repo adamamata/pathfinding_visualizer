@@ -24,9 +24,12 @@ function setup(){
 function drawGrid(){
     let x = 0; 
     let y = 0;
-    for (let i = 0; i < 10; i++){
-        ctx.strokeRect(x, y, cellSize, cellSize);
-        x = x + 1 * 60;
+    for (let j = 0; j < 10; j++){
+        for (let i = 0; i < 10; i++){
+            ctx.strokeRect(x, y, cellSize, cellSize);
+            x = x + 1 * 60;
+        }
+        x = 0;   
+        y = y + 1 * 60;  
     }
 }
-
