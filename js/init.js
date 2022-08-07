@@ -12,6 +12,8 @@ const ctx = canvas.getContext('2d');
 (function () {
     setup();
     drawGrid();
+    
+let board = new Grid(70, 70, 'blue');
 })(); 
 
 //Function to setup the canvas 
