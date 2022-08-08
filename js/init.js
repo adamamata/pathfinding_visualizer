@@ -45,16 +45,16 @@ function Cell() { //Constructor function for each cell in the array
     this.neighbors = [];
     this.addNeighbors = function(grid){
         if (this.x < cols - 1){
-            this.neighbors.push(grid[this.x+1, this.y]);
+            this.neighbors.push(grid[this.x+1][this.y]);
         }
         if (this.x > 0){ 
-            this.neighbors.push(grid[this.x-1, this.y]);
+            this.neighbors.push(grid[this.x-1][this.y]);
         }
         if (this.y < rows - 1){
-            this.neighbors.push(grid[this.x, this.y + 1]);
+            this.neighbors.push(grid[this.x][this.y + 1]);
         }
         if (this.y > 0){
-            this.neighbors.push(grid[this.x, this.y - 1]);
+            this.neighbors.push(grid[this.x][this.y - 1]);
         }
     }
 }
