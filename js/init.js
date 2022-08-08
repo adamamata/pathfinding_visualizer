@@ -6,6 +6,10 @@ const cellSize = 30;
 const rows = 20;
 const cols = 20;
 const grid = new Array(rows); 
+const open = [];
+const closed = [];
+let start;
+let end; 
 
 //FUNCTIONS 
 //Immediately-invoked function expression
@@ -13,6 +17,8 @@ const grid = new Array(rows);
 (function () {
     setup();
     createGrid();
+    setStartEnd();
+    let interval = setInterval(update, 120);
 })(); 
 
 //Function to setup the canvas 
@@ -28,11 +34,26 @@ function Cell() { //Constructor function for each cell in the array
     this.f = 0;
     this.g = 0;
     this.h = 0;
-    this.show = function(color){ //function to show cell on grid 
+    this.surrounding = [];
+    this.show = function(color){ //Function to show cell on grid 
         ctx.fillStyle = color;
         ctx.fillRect(this.x, this.y, cellSize, cellSize);
         ctx.strokeStyle = 'white';
         ctx.strokeRect(this.x, this.y, cellSize, cellSize);
+    }
+    this.addSurr = function (grid){ //Function to add the surrounding nodes to an array
+        if (x < cols - 1){
+            this.surrounding.push(grid[this.x + 1, y]);
+        }
+        if (x > 0){
+            this.surrounding.push(grid[this.x - 1, y]);
+        }
+        if (y < rows - 1){
+            this.surrounding.push(grid[this.x, y + 1]);
+        }
+        if (y > 0){
+            this.surrounding.push(grid[this.x, y - 1]);
+        }
     }
 }
 
@@ -54,5 +75,51 @@ function createGrid(){
         x = 0;
         y = y + 1 * 30;
     }
-    console.log(grid);
+}
+
+//Function that defines the start and end points
+function setStartEnd(){
+    start = grid[0][0];
+    end = grid[cols-1][rows-1];
+    open.push(start);
+}
+
+//Function to remove a node from an array
+function removeArray(arr, e){
+    for (let i = 0; i < arr.length; i++){
+        if (arr[i] === e){
+            arr.splice(i, 1);
+        }
+    }
+}
+
+//Main function
+function update(){
+    if (open.length > 0){
+        let winner = 0;
+        for (let i = 0; i < open.length; i++){
+            if (open[i].f < open[winner].f){
+                winner = i;
+            }
+        }
+        let current = open[winner];
+        if (current === end){
+            console.log('DONE');
+        }
+        removeArray(open, current);
+        closed.push(current);
+        
+    } else {    
+
+    }
+
+    //nodes part of "open" array are green 
+    for (let i = 0; i < open.length; i++){
+        open[i].show('green');
+    }
+
+    //nodes part of "closed" array are red
+    for (let i = 0; i < closed.length; i++){
+        closed.show('red');
+    }
 }
