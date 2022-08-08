@@ -1,11 +1,11 @@
 //GLOBAL VARIABLES 
+const canvas = document.createElement('canvas'); 
+const ctx = canvas.getContext('2d');
 const wh = 600;
 const cellSize = 30; 
 const rows = 20;
 const cols = 20;
 const grid = new Array(cols); 
-const canvas = document.createElement('canvas'); 
-const ctx = canvas.getContext('2d');
 
 //FUNCTIONS 
 //Immediately-invoked function expression
@@ -16,6 +16,8 @@ const ctx = canvas.getContext('2d');
 })(); 
 
 function Cell() { //Constructor function for each cell in the array
+    this.x = 0;
+    this.y = 0;
     this.f = 0;
     this.g = 0;
     this.h = 0;
@@ -31,12 +33,17 @@ function setup(){
     for (let i = 0; i < cols; i++){ //Creating 2D array
         grid[i] = new Array(rows);
     }
+    let x = 0;
+    let y = 0;
     for (let i = 0; i < cols; i++){ //Creating a new cell for each spot in the array
         for (let j = 0; j < rows; j++){
             grid[i][j] = new Cell();
+            x = x + 1 * 30;
+            grid[i][j].x = x;
         }
+        x = 0;
     }
-
+    console.log(grid);
 }
 
 // function draw(x, y){
