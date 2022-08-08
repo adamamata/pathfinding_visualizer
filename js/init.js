@@ -13,7 +13,6 @@ const grid = new Array(rows);
 (function () {
     setup();
     createGrid();
-    // drawGrid();
 })(); 
 
 function Cell() { //Constructor function for each cell in the array
@@ -53,5 +52,4 @@ function createGrid(){
         x = 0;
         y = y + 1 * 30;
     }
-    console.log(grid);
 }
