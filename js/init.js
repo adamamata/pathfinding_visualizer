@@ -44,12 +44,13 @@ function createGrid(){
     for (let i = 0; i < rows; i++){ //Creating a new cell for each spot in the array
         for (let j = 0; j < cols; j++){
             grid[i][j] = new Cell();
-            x = x + 1 * 30;
             grid[i][j].x = x;
             grid[i][j].y = y;
             grid[i][j].show();
+            x = x + 1 * 30;
         }
         x = 0;
         y = y + 1 * 30;
     }
+    console.log(grid);
 }
