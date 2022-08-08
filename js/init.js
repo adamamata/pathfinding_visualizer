@@ -18,7 +18,9 @@ let end;
     setup();
     createGrid();
     setStartEnd();
+    implementAddNeighbors();
     let interval = setInterval(update, 120);
+    
 })(); 
 
 //Function to setup the canvas 
@@ -39,6 +41,21 @@ function Cell() { //Constructor function for each cell in the array
         ctx.fillRect(this.x, this.y, cellSize, cellSize);
         ctx.strokeStyle = 'white';
         ctx.strokeRect(this.x, this.y, cellSize, cellSize);
+    }
+    this.neighbors = [];
+    this.addNeighbors = function(grid){
+        if (this.x < cols - 1){
+            this.neighbors.push(grid[this.x+1, this.y]);
+        }
+        if (this.x > 0){ 
+            this.neighbors.push(grid[this.x-1, this.y]);
+        }
+        if (this.y < rows - 1){
+            this.neighbors.push(grid[this.x, this.y + 1]);
+        }
+        if (this.y > 0){
+            this.neighbors.push(grid[this.x, this.y - 1]);
+        }
     }
 }
 
@@ -80,6 +97,23 @@ function removeArray(arr, e){
 
 //Main function
 function update(){
+    if (open.length > 0){
+        let winner = 0;
+        for (let i = 0; i < open.length; i++){
+            if (open[i].f < open[winner].f){
+                winner = i; 
+            }
+        }
+        let current = open[winner];
+        if (current === end){
+            console.log('DONE!');
+        }
+        removeArray(open, current);
+        closed.push(current);
+    } else {
+
+    }
+
     //nodes part of "open" array are green 
     for (let i = 0; i < open.length; i++){
         open[i].show('green');
@@ -88,5 +122,14 @@ function update(){
     //nodes part of "closed" array are red
     for (let i = 0; i < closed.length; i++){
         closed[i].show('red');
+    }
+}
+
+//Function to add neighbors to each cell 
+function implementAddNeighbors(){
+    for (let i = 0; i < rows; i++){
+        for (let j = 0; j < cols; j++){
+            grid[i][j].addNeighbors(grid);
+        }
     }
 }
