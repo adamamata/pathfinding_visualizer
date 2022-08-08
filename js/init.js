@@ -16,17 +16,7 @@ let end;
 //Runs code immediately when the page loads and keeps it out of the global scope (avoids naming conflicts)
 (function () {
     setup();
-    createGrid();
-    setStartEnd();
-    let interval = setInterval(update, 120);
 })(); 
-
-//Function to setup the canvas 
-function setup(){
-    canvas.setAttribute('width', wh);
-    canvas.setAttribute('height', wh); 
-    document.body.insertBefore(canvas, document.body.childNodes[0]); //Inserts canvas before the first element in body 
-}
 
 function Cell() { //Constructor function for each cell in the array
     this.x = 0;
@@ -40,23 +30,16 @@ function Cell() { //Constructor function for each cell in the array
         ctx.strokeStyle = 'white';
         ctx.strokeRect(this.x, this.y, cellSize, cellSize);
     }
-    this.neighbors = [];
-    this.addNeighbors = function(grid){
-        let x = this.x;
-        let y = this.y;
-        if (this.x < cols - 1){
-            this.neighbors.push(grid[x+1][y]);
-        }
-        if (this.x > 0){ 
-            this.neighbors.push(grid[x-1][y]);
-        }
-        if (this.y < rows - 1){
-            this.neighbors.push(grid[x][y + 1]);
-        }
-        if (this.y > 0){
-            this.neighbors.push(grid[x][y - 1]);
-        }
-    }
+}
+
+//Function to setup the canvas 
+function setup(){
+    let interval = setInterval(update, 120);
+    canvas.setAttribute('width', wh);
+    canvas.setAttribute('height', wh); 
+    document.body.insertBefore(canvas, document.body.childNodes[0]); //Inserts canvas before the first element in body 
+    createGrid();
+    setStartEnd();
 }
 
 //Function to create grid 
@@ -97,22 +80,20 @@ function removeArray(arr, e){
 
 //Main function
 function update(){
-    // if (open.length > 0){
-    //     let winner = 0;
-    //     for (let i = 0; i < open.length; i++){
-    //         if (open[i].f < open[winner].f){
-    //             winner = i; 
-    //         }
-    //     }
-    //     let current = open[winner];
-    //     if (current === end){
-    //         console.log('DONE!');
-    //     }
-    //     removeArray(open, current);
-    //     closed.push(current);
-    // } else {
-
-    // }
+    if (open.length > 0){
+        let winner = 0;
+        for (let i = 0; i < open.length; i++){
+            if (open[i].f < open[winner].f){
+                winner = i;
+            }
+        }
+        let current = open[winner];
+        if (current === end){
+            console.log('FINISHED');
+        }
+        removeArray(open, current);
+        closed.push(current);
+    }
 
     //nodes part of "open" array are green 
     for (let i = 0; i < open.length; i++){
