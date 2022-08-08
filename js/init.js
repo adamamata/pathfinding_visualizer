@@ -15,6 +15,13 @@ const grid = new Array(rows);
     createGrid();
 })(); 
 
+//Function to setup the canvas 
+function setup(){
+    canvas.setAttribute('width', wh);
+    canvas.setAttribute('height', wh); 
+    document.body.insertBefore(canvas, document.body.childNodes[0]); //Inserts canvas before the first element in body 
+}
+
 function Cell() { //Constructor function for each cell in the array
     this.x = 0;
     this.y = 0;
@@ -25,13 +32,6 @@ function Cell() { //Constructor function for each cell in the array
     this.show = function(){ //function to show cell on grid 
         ctx.strokeRect(this.x, this.y, cellSize, cellSize);
     }
-}
-
-//Function to setup the canvas 
-function setup(){
-    canvas.setAttribute('width', wh);
-    canvas.setAttribute('height', wh); 
-    document.body.insertBefore(canvas, document.body.childNodes[0]); //Inserts canvas before the first element in body 
 }
 
 //Function to create grid 
