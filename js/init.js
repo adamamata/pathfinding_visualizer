@@ -87,6 +87,6 @@ function update(){
 
     //nodes part of "closed" array are red
     for (let i = 0; i < closed.length; i++){
-        closed.show('red');
+        closed[i].show('red');
     }
 }
