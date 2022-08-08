@@ -3,7 +3,7 @@ const wh = 600;
 const cellSize = 30; 
 const rows = 20;
 const cols = 20;
-const grid = [];
+const grid = new Array(cols); 
 const canvas = document.createElement('canvas'); 
 const ctx = canvas.getContext('2d');
 
@@ -12,29 +12,46 @@ const ctx = canvas.getContext('2d');
 //Runs code immediately when the page loads and keeps it out of the global scope (avoids naming conflicts)
 (function () {
     setup();
-    drawGrid();
+    // drawGrid();
 })(); 
+
+function Cell() { //Constructor function for each cell in the array
+    this.f = 0;
+    this.g = 0;
+    this.h = 0;
+}
 
 //Function to setup the canvas 
 function setup(){
     canvas.setAttribute('width', wh);
     canvas.setAttribute('height', wh); 
     document.body.insertBefore(canvas, document.body.childNodes[0]); //Inserts canvas before the first element in body 
-}
 
-function draw(x, y){
-    ctx.strokeRect(x, y, cellSize, cellSize);
-}
-
-function drawGrid(){
-    let x = 0; 
-    let y = 0;
-    for (let j = 0; j < rows; j++){
-        for (let i = 0; i < cols; i++){
-            draw(x, y, cellSize, cellSize);
-            x = x + 1 * 30;
-        }
-        x = 0;   
-        y = y + 1 * 30;  
+    //Creating Grid
+    for (let i = 0; i < cols; i++){ //Creating 2D array
+        grid[i] = new Array(rows);
     }
+    for (let i = 0; i < cols; i++){ //Creating a new cell for each spot in the array
+        for (let j = 0; j < rows; j++){
+            grid[i][j] = new Cell();
+        }
+    }
+
 }
+
+// function draw(x, y){
+//     ctx.strokeRect(x, y, cellSize, cellSize);
+// }
+
+// function drawGrid(){
+//     let x = 0; 
+//     let y = 0;
+//     for (let j = 0; j < rows; j++){
+//         for (let i = 0; i < cols; i++){
+//             draw(x, y, cellSize, cellSize);
+//             x = x + 1 * 30;
+//         }
+//         x = 0;   
+//         y = y + 1 * 30;  
+//     }
+// }
