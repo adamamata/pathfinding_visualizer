@@ -1,0 +1,32 @@
+    this.neighbors = [];
+    this.addNeighbors = function(){
+        let x = this.x;
+        let y = this.y;
+        if (x < cols - 1){
+            this.neighbors.push(grid[x+1][y]);
+        }
+        if (x > 0){
+            this.neighbors.push(grid[x-1][y]);
+        }
+        if (y < rows - 1){
+            this.neighbors.push(grid[x][y+1]);
+        }
+        if (y > 0){
+            this.neighbors.push(grid[x][y-1]);
+        }
+    }
+
+    if (open.length > 0){
+        let winner = 0;
+        for (let i = 0; i < open.length; i++){
+            if (open[i].f < open[winner].f){
+                winner = i;
+            }
+        }
+        let current = open[winner];
+        if (current === end){
+            console.log('FINISHED');
+        }
+        removeArray(open, current);
+        closed.push(current);
+    }

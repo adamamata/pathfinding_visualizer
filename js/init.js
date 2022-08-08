@@ -18,7 +18,7 @@ let end;
     setup();
 })(); 
 
-function Cell() { //Constructor function for each cell in the array
+function Cell(x, y) { //Constructor function for each cell in the array
     this.x = 0;
     this.y = 0;
     this.f = 0;
@@ -80,21 +80,6 @@ function removeArray(arr, e){
 
 //Main function
 function update(){
-    if (open.length > 0){
-        let winner = 0;
-        for (let i = 0; i < open.length; i++){
-            if (open[i].f < open[winner].f){
-                winner = i;
-            }
-        }
-        let current = open[winner];
-        if (current === end){
-            console.log('FINISHED');
-        }
-        removeArray(open, current);
-        closed.push(current);
-    }
-
     //nodes part of "open" array are green 
     for (let i = 0; i < open.length; i++){
         open[i].show('green');
