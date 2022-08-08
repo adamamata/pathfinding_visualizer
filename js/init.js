@@ -18,9 +18,7 @@ let end;
     setup();
     createGrid();
     setStartEnd();
-    implementAddNeighbors();
     let interval = setInterval(update, 120);
-    
 })(); 
 
 //Function to setup the canvas 
@@ -44,17 +42,19 @@ function Cell() { //Constructor function for each cell in the array
     }
     this.neighbors = [];
     this.addNeighbors = function(grid){
+        let x = this.x;
+        let y = this.y;
         if (this.x < cols - 1){
-            this.neighbors.push(grid[this.x+1][this.y]);
+            this.neighbors.push(grid[x+1][y]);
         }
         if (this.x > 0){ 
-            this.neighbors.push(grid[this.x-1][this.y]);
+            this.neighbors.push(grid[x-1][y]);
         }
         if (this.y < rows - 1){
-            this.neighbors.push(grid[this.x][this.y + 1]);
+            this.neighbors.push(grid[x][y + 1]);
         }
         if (this.y > 0){
-            this.neighbors.push(grid[this.x][this.y - 1]);
+            this.neighbors.push(grid[x][y - 1]);
         }
     }
 }
@@ -97,22 +97,22 @@ function removeArray(arr, e){
 
 //Main function
 function update(){
-    if (open.length > 0){
-        let winner = 0;
-        for (let i = 0; i < open.length; i++){
-            if (open[i].f < open[winner].f){
-                winner = i; 
-            }
-        }
-        let current = open[winner];
-        if (current === end){
-            console.log('DONE!');
-        }
-        removeArray(open, current);
-        closed.push(current);
-    } else {
+    // if (open.length > 0){
+    //     let winner = 0;
+    //     for (let i = 0; i < open.length; i++){
+    //         if (open[i].f < open[winner].f){
+    //             winner = i; 
+    //         }
+    //     }
+    //     let current = open[winner];
+    //     if (current === end){
+    //         console.log('DONE!');
+    //     }
+    //     removeArray(open, current);
+    //     closed.push(current);
+    // } else {
 
-    }
+    // }
 
     //nodes part of "open" array are green 
     for (let i = 0; i < open.length; i++){
@@ -122,14 +122,5 @@ function update(){
     //nodes part of "closed" array are red
     for (let i = 0; i < closed.length; i++){
         closed[i].show('red');
-    }
-}
-
-//Function to add neighbors to each cell 
-function implementAddNeighbors(){
-    for (let i = 0; i < rows; i++){
-        for (let j = 0; j < cols; j++){
-            grid[i][j].addNeighbors(grid);
-        }
     }
 }
