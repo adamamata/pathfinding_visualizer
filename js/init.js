@@ -28,7 +28,10 @@ function Cell() { //Constructor function for each cell in the array
     this.f = 0;
     this.g = 0;
     this.h = 0;
-    this.show = function(){ //function to show cell on grid 
+    this.show = function(color){ //function to show cell on grid 
+        ctx.fillStyle = color;
+        ctx.fillRect(this.x, this.y, cellSize, cellSize);
+        ctx.strokeStyle = 'white';
         ctx.strokeRect(this.x, this.y, cellSize, cellSize);
     }
 }
